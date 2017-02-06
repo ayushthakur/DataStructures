@@ -12,6 +12,6 @@ class BinaryTreeImp{
 		bst.addChild(25);
 		bst.remove(25);
 		bst.printTree();
-		
+		System.out.println("Max Height: "+bst.getMaxHeight());
 	}
 }

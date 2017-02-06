@@ -14,7 +14,7 @@ public class BinaryTree {
 		return false;
 	}
 
-	//Add a node to a tree
+	// Add a node to a tree
 	public void addChild(int key) {
 		Node childNode = new Node(key);
 		Node parent;
@@ -60,7 +60,7 @@ public class BinaryTree {
 		Node focusNode = root;
 		boolean isLeft = false;
 
-		//Find the node to be deleted
+		// Find the node to be deleted
 		while (focusNode.getKey() != key) {
 			parent = focusNode;
 
@@ -75,7 +75,7 @@ public class BinaryTree {
 			}
 		}
 
-		//If the node is a leaf node, simply remove it.
+		// If the node is a leaf node, simply remove it.
 		if (focusNode.getLeftChild() == null && focusNode.getRightChild() == null) {
 			if (focusNode.equals(root)) {
 				root = null;
@@ -85,8 +85,9 @@ public class BinaryTree {
 				else
 					parent.setRightChild(null);
 			}
-		} 
-		//If the node has a right subtree, then replace the node with the right child 
+		}
+		// If the node has a right subtree, then replace the node with the right
+		// child
 		else if (focusNode.getLeftChild() == null) {
 			if (focusNode.equals(root)) {
 				root = focusNode.getRightChild();
@@ -97,7 +98,8 @@ public class BinaryTree {
 					parent.setRightChild(focusNode.getRightChild());
 			}
 		}
-		//If the node has a left subtree, then replace the node with the left child
+		// If the node has a left subtree, then replace the node with the left
+		// child
 		else if (focusNode.getRightChild() == null) {
 			if (focusNode.equals(root)) {
 				root = focusNode.getLeftChild();
@@ -108,7 +110,8 @@ public class BinaryTree {
 					parent.setRightChild(focusNode.getLeftChild());
 			}
 		}
-		//If the node has both the children, then replace the node by its inorder successor
+		// If the node has both the children, then replace the node by its
+		// inorder successor
 		else {
 			Node successor = getInorderSuccessor(focusNode, key);
 			if (focusNode.equals(root)) {
@@ -125,7 +128,8 @@ public class BinaryTree {
 	private Node getInorderSuccessor(Node replaceNode, int key) {
 		Node focusNode = replaceNode;
 
-		// If there is a right subtree, then find the smallest element in the right subtree
+		// If there is a right subtree, then find the smallest element in the
+		// right subtree
 		if (replaceNode.getRightChild() != null) {
 			replaceNode = replaceNode.getRightChild();
 			while (focusNode.getLeftChild() != null) {
@@ -133,7 +137,8 @@ public class BinaryTree {
 			}
 			return focusNode;
 		}
-		//If right subtree is not present, find the next smallest number by traversing the tree
+		// If right subtree is not present, find the next smallest number by
+		// traversing the tree
 		else {
 			focusNode = root;
 			while (focusNode.hasChildren()) {
@@ -144,6 +149,25 @@ public class BinaryTree {
 				}
 			}
 			return focusNode;
+		}
+	}
+
+	public int getMaxHeight() {
+		return maxHeight(this.root);
+	}
+
+	
+	//Find the height of the left subtree and the height of the left subtree and add them. Add one for root.
+	private int maxHeight(Node aNode) {
+		if (aNode == null) {
+			return -1;
+		}
+		int leftHeight = maxHeight(aNode.getLeftChild());
+		int rightHeight = maxHeight(aNode.getRightChild());
+		if (leftHeight > rightHeight) {
+			return leftHeight + 1;
+		} else {
+			return rightHeight + 1;
 		}
 	}
 }
