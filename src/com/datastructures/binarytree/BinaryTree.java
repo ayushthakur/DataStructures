@@ -159,8 +159,8 @@ public class BinaryTree {
 		return maxHeight(this.root);
 	}
 
-	
-	//Find the height of the left subtree and the height of the left subtree and add them. Add one for root.
+	// Find the height of the left subtree and the height of the left subtree
+	// and add them. Add one for root.
 	private int maxHeight(Node aNode) {
 		if (aNode == null) {
 			return 0;
@@ -173,39 +173,62 @@ public class BinaryTree {
 			return rightHeight + 1;
 		}
 	}
-	
-	public int getIterativeMaxHeight(){
+
+	public int getIterativeMaxHeight() {
 		return iterativeMaxHeight(root);
 	}
-	
-	private int iterativeMaxHeight(Node aNode){
+
+	private int iterativeMaxHeight(Node aNode) {
 		int height = 0;
-		if(aNode == null){
+		if (aNode == null) {
 			return 0;
 		}
-		
+
 		Queue<Node> levelQueue = new LinkedList<>();
 		levelQueue.add(aNode);
-		
-		while(true){
-			//Number of Nodes at current level
+
+		while (true) {
+			// Number of Nodes at current level
 			int count = levelQueue.size();
-			if(count == 0){
+			if (count == 0) {
 				return height;
 			}
 			height++;
-			
-			while(count > 0){
+
+			while (count > 0) {
 				Node headNode = levelQueue.peek();
+				// Remove nodes from current level and nodes from the next level
 				levelQueue.remove();
-				
-				if(headNode.getLeftChild() != null)
+
+				if (headNode.getLeftChild() != null)
 					levelQueue.add(headNode.getLeftChild());
-				else if(headNode.getRightChild() != null)
+				else if (headNode.getRightChild() != null)
 					levelQueue.add(headNode.getRightChild());
-				
+
 				count--;
 			}
 		}
+	}
+
+	public int getDiameter() {
+		return diameter(root);
+	}
+
+	//Longest path between two nodes in a tree
+	private int diameter(Node aNode) {
+		
+		/*
+		 * Find max of left subtree, right subtree, left diameter and right diameter
+		 * */
+		if(aNode == null){
+			return 0;
+		}
+		int heightl = maxHeight(aNode.getLeftChild());
+		int heightr = maxHeight(aNode.getRightChild());
+
+		int lDiameter = diameter(aNode.getLeftChild());
+		int rDiameter = diameter(aNode.getRightChild());
+
+		return Math.max((heightl + heightr + 1), Math.max(lDiameter, rDiameter));
 	}
 }
