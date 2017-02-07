@@ -15,5 +15,8 @@ class BinaryTreeImp{
 		System.out.println("Max Height: "+bst.getMaxHeight());
 		System.out.println("Iterative Max Height: "+bst.getIterativeMaxHeight());
 		System.out.println("Diameter: "+bst.getDiameter());
+		System.out.println("Mirroring Tree.....");
+		bst.mirrorTree();
+		bst.printTree();
 	}
 }

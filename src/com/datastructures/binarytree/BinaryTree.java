@@ -4,7 +4,15 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class BinaryTree {
-	Node root = null;
+	private Node root = null;
+
+	public Node getRoot() {
+		return root;
+	}
+
+	public void setRoot(Node root) {
+		this.root = root;
+	}
 
 	public BinaryTree() {
 		super();
@@ -230,5 +238,26 @@ public class BinaryTree {
 		int rDiameter = diameter(aNode.getRightChild());
 
 		return Math.max((heightl + heightr + 1), Math.max(lDiameter, rDiameter));
+	}
+	
+	//Mirror a tree
+	public Node mirrorTree(){
+		return mirror(root);
+	}
+	
+	//Swap the left subtree with the right subtree
+	private Node mirror(Node mirrorNode){
+		
+		if(mirrorNode == null){
+			return mirrorNode;
+		}
+		
+		Node leftMirror = mirror(mirrorNode.getLeftChild());
+		Node rightMirror = mirror(mirrorNode.getRightChild());
+		
+		mirrorNode.setLeftChild(rightMirror);
+		mirrorNode.setRightChild(leftMirror);
+		
+		return mirrorNode;
 	}
 }
