@@ -2,7 +2,7 @@ package com.datastructures.linkedlist;
 
 public class Node {
 	private int key;
-	Node next;
+	private Node next;
 	
 	
 	public Node(int key) {

@@ -8,7 +8,7 @@ public class LinkedList {
 			root = new Node(key);
 		} else {
 			Node newNode = new Node(key);
-			newNode.next = root;
+			newNode.setNext(root);
 			root = newNode;
 		}
 	}
@@ -18,31 +18,51 @@ public class LinkedList {
 		while (tempNode != null) {
 			System.out.println(tempNode.getKey());
 			System.out.println();
-			tempNode = tempNode.next;
+			tempNode = tempNode.getNext();
 		}
 	}
 
 	public void deleteNode(int key) {
 		if (!isEmpty()) {
 			if (root.getKey() == key) {
-				root = root.next;
+				root = root.getNext();
 			} else {
 				Node previousNode = null;
 				Node currNode = root;
 				while (currNode != null) {
 					if (currNode.getKey() == key) {
-						previousNode.next = currNode.next;
-						currNode.next = null;
+						previousNode.setNext(currNode.getNext());
+						currNode.setNext(null);;
 					}
 					previousNode = currNode;
-					currNode = currNode.next;
+					currNode = currNode.getNext();
 				}
 			}
 		}
 	}
 
+	//Find the nth node form the last
+	public int nFromLast(int n){
+		Node head = root;
+		Node skipNode = root;
+		//If last Node is considered then count=1 else count = 0
+		int count = 1;
+		while(count != n){
+			skipNode = skipNode.getNext();
+			count++;
+		}
+		while(skipNode.getNext() != null){
+			head = head.getNext();
+			skipNode = skipNode.getNext();
+		}
+		
+		return head.getKey();
+	}
+	
+
+	
 	private boolean isEmpty() {
-		if (root.next == null) {
+		if (root == null) {
 			return true;
 		}
 		return false;

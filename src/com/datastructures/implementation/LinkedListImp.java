@@ -14,5 +14,6 @@ public class LinkedListImp {
 		System.out.println("Deleting Node now");
 		linkedList.deleteNode(45);
 		linkedList.showList();
+		System.out.println("Second last node: "+linkedList.nFromLast(2));
 	}
 }
