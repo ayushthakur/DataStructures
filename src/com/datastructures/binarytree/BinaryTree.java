@@ -1,5 +1,8 @@
 package com.datastructures.binarytree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinaryTree {
 	Node root = null;
 
@@ -160,7 +163,7 @@ public class BinaryTree {
 	//Find the height of the left subtree and the height of the left subtree and add them. Add one for root.
 	private int maxHeight(Node aNode) {
 		if (aNode == null) {
-			return -1;
+			return 0;
 		}
 		int leftHeight = maxHeight(aNode.getLeftChild());
 		int rightHeight = maxHeight(aNode.getRightChild());
@@ -168,6 +171,41 @@ public class BinaryTree {
 			return leftHeight + 1;
 		} else {
 			return rightHeight + 1;
+		}
+	}
+	
+	public int getIterativeMaxHeight(){
+		return iterativeMaxHeight(root);
+	}
+	
+	private int iterativeMaxHeight(Node aNode){
+		int height = 0;
+		if(aNode == null){
+			return 0;
+		}
+		
+		Queue<Node> levelQueue = new LinkedList<>();
+		levelQueue.add(aNode);
+		
+		while(true){
+			//Number of Nodes at current level
+			int count = levelQueue.size();
+			if(count == 0){
+				return height;
+			}
+			height++;
+			
+			while(count > 0){
+				Node headNode = levelQueue.peek();
+				levelQueue.remove();
+				
+				if(headNode.getLeftChild() != null)
+					levelQueue.add(headNode.getLeftChild());
+				else if(headNode.getRightChild() != null)
+					levelQueue.add(headNode.getRightChild());
+				
+				count--;
+			}
 		}
 	}
 }
