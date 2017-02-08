@@ -1,7 +1,15 @@
 package com.datastructures.linkedlist;
 
 public class LinkedList {
-	Node root = null;
+	private Node root = null;
+
+	public Node getRoot() {
+		return root;
+	}
+
+	public void setRoot(Node root) {
+		this.root = root;
+	}
 
 	public void addNode(int key) {
 		if (isEmpty()) {
@@ -32,7 +40,8 @@ public class LinkedList {
 				while (currNode != null) {
 					if (currNode.getKey() == key) {
 						previousNode.setNext(currNode.getNext());
-						currNode.setNext(null);;
+						currNode.setNext(null);
+						;
 					}
 					previousNode = currNode;
 					currNode = currNode.getNext();
@@ -41,31 +50,49 @@ public class LinkedList {
 		}
 	}
 
-	//Find the nth node form the last
-	public int nFromLast(int n){
+	// Find the nth node form the last
+	public int nFromLast(int n) {
 		Node head = root;
 		Node skipNode = root;
-		//If last Node is considered then count=1 else count = 0
+		// If last Node is considered then count=1 else count = 0
 		int count = 1;
-		while(count != n){
+		while (count != n) {
 			skipNode = skipNode.getNext();
 			count++;
 		}
-		while(skipNode.getNext() != null){
+		while (skipNode.getNext() != null) {
 			head = head.getNext();
 			skipNode = skipNode.getNext();
 		}
-		
+
 		return head.getKey();
 	}
-	
 
+	// Merge two LinkedLists with alternating nodes
+	public void merge(LinkedList linkedList2) {
+		Node head1 = root;
+		Node head2 = linkedList2.getRoot();
+		Node next1,next2;
+		
+		while(head1 != null && head2 != null){
+			next1 = head1.getNext();
+			next2 = head2.getNext();
+			
+			head2.setNext(next1);
+			head1.setNext(head2);
+			
+			head1 = next1;
+			head2 = next2;
+		}
+		
+		linkedList2.setRoot(head2);
+	}
 	
-	private boolean isEmpty() {
+	public boolean isEmpty() {
 		if (root == null) {
 			return true;
 		}
 		return false;
 	}
-	
+
 }
