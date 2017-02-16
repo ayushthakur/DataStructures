@@ -4,6 +4,11 @@ public class Node {
 	private int key;
 	private Node next;
 
+	
+	public Node() {
+		super();
+	}
+
 	public Node(int key) {
 		super();
 		this.key = key;

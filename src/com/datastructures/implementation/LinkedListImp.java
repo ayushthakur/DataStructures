@@ -9,7 +9,7 @@ public class LinkedListImp {
 		linkedList.addNode(3);
 		linkedList.addNode(5);
 		linkedList.addNode(7);
-		linkedList.showList();
+//		linkedList.showList();
 		
 //		System.out.println("Deleting Node now");
 //		linkedList.deleteNode(45);
@@ -22,9 +22,8 @@ public class LinkedListImp {
 		linkedList2.addNode(6);
 		linkedList2.addNode(8);
 		
-		linkedList2.merge(linkedList);
-		System.out.println("Merged List...");
-		linkedList2.showList();
+//		linkedList2.showList();
 		
+		linkedList.addList(linkedList2).showList();
 	}
 }

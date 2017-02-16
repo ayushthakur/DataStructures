@@ -3,6 +3,18 @@ package com.datastructures.linkedlist;
 public class LinkedList {
 	private Node root = null;
 
+	
+	
+	public LinkedList() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public LinkedList(Node root) {
+		super();
+		this.root = root;
+	}
+
 	public Node getRoot() {
 		return root;
 	}
@@ -94,5 +106,33 @@ public class LinkedList {
 		}
 		return false;
 	}
-
+	
+	public LinkedList addList(LinkedList list2){
+		Node l1 = this.root;
+		Node l2 = list2.getRoot();
+		int carry = 0;
+		LinkedList sumList = new LinkedList();
+		while(l1 != null && l2!= null){
+			System.out.println("l1: "+l1.getKey());
+			System.out.println("l2: "+l2.getKey());
+			
+			int sum = l1.getKey() + l2.getKey() + carry;
+			
+			System.out.println("Sum: "+sum);
+			if(sum > 9){
+				carry = 1;
+				sum -= 10;
+			}else{
+				carry = 0;
+			}
+			Node sumNode = new Node(sum);
+			sumList.addNode(sumNode.getKey());
+			l1 = l1.getNext();
+			l2 = l2.getNext();
+		}
+		if(carry > 0){
+			sumList.addNode(carry);
+		}
+		return sumList;
+	}
 }
