@@ -1,5 +1,10 @@
 package com.datastructures.leetcode.string;
 
+/*
+ * Given a string s, find the longest palindromic substring in s. 
+ * You may assume that the maximum length of s is 1000.
+ */
+
 public class LongestPallindromicSubstring {
 	public static void main(String[] args) {
 		System.out.println(longestPalindrome("babad"));
