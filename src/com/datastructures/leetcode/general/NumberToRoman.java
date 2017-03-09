@@ -1,5 +1,9 @@
 package com.datastructures.leetcode.general;
 
+/*
+ * Convert a given number to Roman Numerals
+ */
+
 import java.util.HashMap;
 import java.util.TreeMap;
 
@@ -37,7 +41,7 @@ public class NumberToRoman {
 			return memo.get(l);
 		} else {
 			String answer = data.get(l) + intToRoman(num - l); 
-			memo.put(l, answer);
+			memo.put(num, answer);
 			return answer;
 		}
 	}
