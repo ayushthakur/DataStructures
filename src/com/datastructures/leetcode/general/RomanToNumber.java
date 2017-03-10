@@ -26,7 +26,7 @@ public class RomanToNumber {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(romanToInt("MLXXXVIII"));
+		System.out.println(romanToInt("XIX"));
 	}
 
 	public static int romanToInt(String roman) {
