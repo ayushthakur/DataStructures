@@ -9,6 +9,7 @@ public class TrieImpl {
 		trie.add("helium");
 		trie.add("helicopter");
 		System.out.println("Added!");
-		System.out.println(trie.contains("hell"));
+		System.out.println(trie.contains("abcd"));
+		System.out.println(trie.longestPrefix());
 	}
 }

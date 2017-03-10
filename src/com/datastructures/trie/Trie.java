@@ -17,6 +17,7 @@ public class Trie {
 				currNode = currNode.getChildren().get(c);
 			} else {
 				Node node = new Node();
+				node.setValue(c);
 				currNode.getChildren().put(c, node);
 				currNode = currNode.getChildren().get(c);
 				currNode.setEnd(true);
@@ -35,5 +36,18 @@ public class Trie {
 			}
 		}
 		return flag;
+	}
+	
+	public String longestPrefix(){
+		String longestPrefix = "";
+		Node focusNode = root.getFirstChild();
+		while(true){
+			if(focusNode.getChildren().size() >= 2){
+				longestPrefix += ""+focusNode.getValue();
+				return longestPrefix;
+			}
+			longestPrefix += ""+focusNode.getValue();
+			focusNode = focusNode.getFirstChild();
+		}
 	}
 }
