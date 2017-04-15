@@ -1,6 +1,8 @@
 package com.datastructures.binarytree;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class BinaryTree {
@@ -57,6 +59,10 @@ public class BinaryTree {
 	public void printTree() {
 		inOrderTraverse(root);
 	}
+	
+	public void printPreOrder(){
+		preOrderTraverse(this.root);
+	}
 
 	private void inOrderTraverse(Node focusNode) {
 		if (focusNode != null) {
@@ -64,6 +70,21 @@ public class BinaryTree {
 			System.out.println(focusNode.getKey());
 			inOrderTraverse(focusNode.getRightChild());
 		}
+	}
+	
+	private void preOrderTraverse(Node focusNode){
+		if(focusNode == null){
+			return;
+		}
+		System.out.println(focusNode.getKey());
+		preOrderTraverse(focusNode.getLeftChild());
+		preOrderTraverse(focusNode.getRightChild());
+		
+//		if(focusNode!=null){
+//			System.out.println(focusNode.getKey());
+//			preOrderTraverse(focusNode.getLeftChild());
+//			preOrderTraverse(focusNode.getRightChild());
+//		}
 	}
 
 	public void remove(int key) {
@@ -167,7 +188,7 @@ public class BinaryTree {
 		return maxHeight(this.root);
 	}
 
-	// Find the height of the left subtree and the height of the left subtree
+	// Find the height of the left subtree and the height of the right subtree
 	// and add them. Add one for root.
 	private int maxHeight(Node aNode) {
 		if (aNode == null) {
@@ -222,13 +243,14 @@ public class BinaryTree {
 		return diameter(root);
 	}
 
-	//Longest path between two nodes in a tree
+	// Longest path between two nodes in a tree
 	private int diameter(Node aNode) {
-		
+
 		/*
-		 * Find max of left subtree, right subtree, left diameter and right diameter
-		 * */
-		if(aNode == null){
+		 * Find max of left subtree, right subtree, left diameter and right
+		 * diameter
+		 */
+		if (aNode == null) {
 			return 0;
 		}
 		int heightl = maxHeight(aNode.getLeftChild());
@@ -239,25 +261,70 @@ public class BinaryTree {
 
 		return Math.max((heightl + heightr + 1), Math.max(lDiameter, rDiameter));
 	}
-	
-	//Mirror a tree
-	public Node mirrorTree(){
+
+	// Mirror a tree
+	public Node mirrorTree() {
 		return mirror(root);
 	}
-	
-	//Swap the left subtree with the right subtree
-	private Node mirror(Node mirrorNode){
-		
-		if(mirrorNode == null){
+
+	// Swap the left subtree with the right subtree
+	private Node mirror(Node mirrorNode) {
+
+		if (mirrorNode == null) {
 			return mirrorNode;
 		}
-		
+
 		Node leftMirror = mirror(mirrorNode.getLeftChild());
 		Node rightMirror = mirror(mirrorNode.getRightChild());
-		
+
 		mirrorNode.setLeftChild(rightMirror);
 		mirrorNode.setRightChild(leftMirror);
-		
+
 		return mirrorNode;
+	}
+
+//	public List<Node> toList(Node n) {
+//
+//		List<Node> nodes = new ArrayList<Node>();
+//		toListUtil(nodes, n);
+//		return nodes;
+//	}
+
+	private void toListUtil(List<Node> nodes, Node n) {
+		if (n == null) {
+			return;
+		}
+		
+		toListUtil(nodes, n.getLeftChild());
+		nodes.add(n);
+		toListUtil(nodes, n.getRightChild());
+		
+	}
+
+	public void balance() {
+
+		
+		List<Node> nodes = new ArrayList<Node>();
+
+		toListUtil(nodes, this.root);
+
+		setRoot(buildTree(nodes, 0, nodes.size()-1));
+	}
+
+	private Node buildTree(List<Node> nodes, int start, int end) {
+
+		if(start > end){
+			return null;
+		}
+		
+		
+		int mid = (start + end) / 2;
+		
+		Node midNode = nodes.get(mid);
+		
+		midNode.setLeftChild(buildTree(nodes, start, mid-1));
+		midNode.setRightChild(buildTree(nodes, mid+1, end));
+
+		return midNode;
 	}
 }
