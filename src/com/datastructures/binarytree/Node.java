@@ -55,12 +55,4 @@ public class Node {
 			return false;
 	}
 	
-	public void traverseInorderFromNode(Node n){
-		while(n != null){
-			traverseInorderFromNode(n.getLeftChild());
-			System.out.println(n.getKey());
-			traverseInorderFromNode(n.getRightChild());
-		}
-	}
-
 }

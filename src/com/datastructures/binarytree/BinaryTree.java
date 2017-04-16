@@ -59,8 +59,8 @@ public class BinaryTree {
 	public void printTree() {
 		inOrderTraverse(root);
 	}
-	
-	public void printPreOrder(){
+
+	public void printPreOrder() {
 		preOrderTraverse(this.root);
 	}
 
@@ -71,20 +71,20 @@ public class BinaryTree {
 			inOrderTraverse(focusNode.getRightChild());
 		}
 	}
-	
-	private void preOrderTraverse(Node focusNode){
-		if(focusNode == null){
+
+	private void preOrderTraverse(Node focusNode) {
+		if (focusNode == null) {
 			return;
 		}
 		System.out.println(focusNode.getKey());
 		preOrderTraverse(focusNode.getLeftChild());
 		preOrderTraverse(focusNode.getRightChild());
-		
-//		if(focusNode!=null){
-//			System.out.println(focusNode.getKey());
-//			preOrderTraverse(focusNode.getLeftChild());
-//			preOrderTraverse(focusNode.getRightChild());
-//		}
+
+		// if(focusNode!=null){
+		// System.out.println(focusNode.getKey());
+		// preOrderTraverse(focusNode.getLeftChild());
+		// preOrderTraverse(focusNode.getRightChild());
+		// }
 	}
 
 	public void remove(int key) {
@@ -283,48 +283,59 @@ public class BinaryTree {
 		return mirrorNode;
 	}
 
-//	public List<Node> toList(Node n) {
-//
-//		List<Node> nodes = new ArrayList<Node>();
-//		toListUtil(nodes, n);
-//		return nodes;
-//	}
+	// Convert tree to a List
+	public void asList(List<Node> nodes) {
 
-	private void toListUtil(List<Node> nodes, Node n) {
+		asListUtil(nodes, this.root);
+	}
+
+	private void asListUtil(List<Node> nodes, Node n) {
 		if (n == null) {
 			return;
 		}
-		
-		toListUtil(nodes, n.getLeftChild());
+
+		asListUtil(nodes, n.getLeftChild());
 		nodes.add(n);
-		toListUtil(nodes, n.getRightChild());
-		
+		asListUtil(nodes, n.getRightChild());
+
 	}
 
 	public void balance() {
 
-		
 		List<Node> nodes = new ArrayList<Node>();
 
-		toListUtil(nodes, this.root);
+		asList(nodes);
 
-		setRoot(buildTree(nodes, 0, nodes.size()-1));
+		setRoot(buildTree(nodes, 0, nodes.size() - 1));
 	}
 
+	// Build Tree from a List of Nodes
 	private Node buildTree(List<Node> nodes, int start, int end) {
 
-		if(start > end){
+		if (start > end) {
 			return null;
 		}
-		
-		
+
 		int mid = (start + end) / 2;
-		
+
 		Node midNode = nodes.get(mid);
-		
-		midNode.setLeftChild(buildTree(nodes, start, mid-1));
-		midNode.setRightChild(buildTree(nodes, mid+1, end));
+
+		midNode.setLeftChild(buildTree(nodes, start, mid - 1));
+		midNode.setRightChild(buildTree(nodes, mid + 1, end));
 
 		return midNode;
 	}
+
+	public boolean areIdentical(Node root1, Node root2) {
+		if (root1 == null && root2 == null) {
+			return true;
+		} else if (root1 != null && root2 != null) {
+			if (root1.getKey() == root2.getKey() && areIdentical(root1.getLeftChild(), root2.getLeftChild())
+					&& areIdentical(root1.getRightChild(), root2.getRightChild())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
