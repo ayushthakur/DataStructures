@@ -1,5 +1,8 @@
 package com.datastructures.trie;
 
+import java.util.HashMap;
+import java.util.Set;
+
 public class Trie {
 	Node root;
 
@@ -25,29 +28,47 @@ public class Trie {
 		}
 	}
 
-	public boolean contains(String s){
+	public boolean contains(String s) {
 		Node focusNode = root;
 		boolean flag = true;
-		for(int i=0;i<s.length();i++){
-			if(focusNode.getChildren().containsKey(s.charAt(i))){
+		for (int i = 0; i < s.length(); i++) {
+			if (focusNode.getChildren().containsKey(s.charAt(i))) {
 				focusNode = focusNode.getChildren().get(s.charAt(i));
-			}else{
+			} else {
 				flag = false;
 			}
 		}
 		return flag;
 	}
-	
-	public String longestPrefix(){
+
+	public String longestPrefix() {
 		String longestPrefix = "";
 		Node focusNode = root.getFirstChild();
-		while(true){
-			if(focusNode.getChildren().size() >= 2){
-				longestPrefix += ""+focusNode.getValue();
+		while (true) {
+			if (focusNode.getChildren().size() >= 2) {
+				longestPrefix += "" + focusNode.getValue();
 				return longestPrefix;
 			}
-			longestPrefix += ""+focusNode.getValue();
+			longestPrefix += "" + focusNode.getValue();
 			focusNode = focusNode.getFirstChild();
+		}
+	}
+
+	public void printTrie() {
+		printTrieUtil(this.root);
+	}
+
+	private void printTrieUtil(Node root2) {
+		if(root2 == null){
+			return;
+		}
+		HashMap<Character,Node> children = root2.getChildren();
+		
+		Set<Character> childEntry = children.keySet();
+		
+		for(Character child : childEntry){
+			System.out.println(children.get(child).getValue());
+			printTrieUtil(children.get(child));
 		}
 	}
 }
