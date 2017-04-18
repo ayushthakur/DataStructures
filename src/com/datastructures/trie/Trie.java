@@ -20,7 +20,7 @@ public class Trie {
 				currNode = currNode.getChildren().get(c);
 			} else {
 				Node node = new Node();
-				node.setValue(c);
+				node.setValue(String.valueOf(c));
 				currNode.getChildren().put(c, node);
 				currNode = currNode.getChildren().get(c);
 				currNode.setEnd(true);

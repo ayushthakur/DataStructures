@@ -2,8 +2,6 @@ package com.datastructures.linkedlist;
 
 public class LinkedList {
 	private Node root = null;
-
-	
 	
 	public LinkedList() {
 		super();
@@ -113,12 +111,9 @@ public class LinkedList {
 		int carry = 0;
 		LinkedList sumList = new LinkedList();
 		while(l1 != null && l2!= null){
-			System.out.println("l1: "+l1.getKey());
-			System.out.println("l2: "+l2.getKey());
 			
 			int sum = l1.getKey() + l2.getKey() + carry;
 			
-			System.out.println("Sum: "+sum);
 			if(sum > 9){
 				carry = 1;
 				sum -= 10;
@@ -134,5 +129,20 @@ public class LinkedList {
 			sumList.addNode(carry);
 		}
 		return sumList;
+	}
+	
+	public void reverse(){
+		Node previous = null;
+		Node current = this.root;
+		Node next = null;
+		
+		while(current!=null){
+			next = current.getNext();
+			current.setNext(previous);
+			previous = current;
+			current = next;
+		}
+		
+		this.root = previous;
 	}
 }

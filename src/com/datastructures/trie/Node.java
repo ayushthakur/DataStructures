@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Node {
-	private Character value;
+	private String value;
 	private HashMap<Character, Node> children = new HashMap<Character, Node>();
 	private boolean isEnd;
 
@@ -29,11 +29,11 @@ public class Node {
 		this.isEnd = isEnd;
 	}
 
-	public Character getValue() {
+	public String getValue() {
 		return value;
 	}
 
-	public void setValue(Character ch) {
+	public void setValue(String ch) {
 		this.value = ch;
 	}
 
