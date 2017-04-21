@@ -1,11 +1,11 @@
 package com.datastructures.binarytree;
 
-public class Node {
+public class TNode {
 	private int key;
-	private Node leftChild;
-	private Node rightChild;
+	private TNode leftChild;
+	private TNode rightChild;
 
-	public Node(int key) {
+	public TNode(int key) {
 		super();
 		this.key = key;
 		this.leftChild = null;
@@ -20,19 +20,19 @@ public class Node {
 		this.key = key;
 	}
 
-	public Node getLeftChild() {
+	public TNode getLeftChild() {
 		return leftChild;
 	}
 
-	public void setLeftChild(Node leftChild) {
+	public void setLeftChild(TNode leftChild) {
 		this.leftChild = leftChild;
 	}
 
-	public Node getRightChild() {
+	public TNode getRightChild() {
 		return rightChild;
 	}
 
-	public void setRightChild(Node rightChild) {
+	public void setRightChild(TNode rightChild) {
 		this.rightChild = rightChild;
 	}
 	
@@ -47,7 +47,7 @@ public class Node {
 	// Compare two Nodes by their keys
 	@Override
 	public boolean equals(Object obj) {
-		Node node = (Node) obj;
+		TNode node = (TNode) obj;
 
 		if (this.key == node.getKey())
 			return true;

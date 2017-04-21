@@ -6,13 +6,18 @@ import java.util.List;
 import java.util.Queue;
 
 public class BinaryTree {
-	private Node root = null;
+	private TNode root = null;
 
-	public Node getRoot() {
+	public BinaryTree(TNode root) {
+		super();
+		this.root = root;
+	}
+
+	public TNode getRoot() {
 		return root;
 	}
 
-	public void setRoot(Node root) {
+	public void setRoot(TNode root) {
 		this.root = root;
 	}
 
@@ -29,17 +34,17 @@ public class BinaryTree {
 
 	// Add a node to a tree
 	public void addChild(int key) {
-		Node childNode = new Node(key);
-		Node parent;
+		TNode childNode = new TNode(key);
+		TNode parent;
 
 		if (isEmpty()) {
 			root = childNode;
 		} else {
-			Node focusNode = root;
+			TNode focusNode = root;
 
 			while (true) {
 				parent = focusNode;
-				if (focusNode.getKey() < key) {
+				if (focusNode.getKey() > key) {
 					focusNode = focusNode.getLeftChild();
 					if (focusNode == null) {
 						parent.setLeftChild(childNode);
@@ -64,7 +69,7 @@ public class BinaryTree {
 		preOrderTraverse(this.root);
 	}
 
-	private void inOrderTraverse(Node focusNode) {
+	private void inOrderTraverse(TNode focusNode) {
 		if (focusNode != null) {
 			inOrderTraverse(focusNode.getLeftChild());
 			System.out.println(focusNode.getKey());
@@ -72,7 +77,7 @@ public class BinaryTree {
 		}
 	}
 
-	private void preOrderTraverse(Node focusNode) {
+	private void preOrderTraverse(TNode focusNode) {
 		if (focusNode == null) {
 			return;
 		}
@@ -88,8 +93,8 @@ public class BinaryTree {
 	}
 
 	public void remove(int key) {
-		Node parent = root;
-		Node focusNode = root;
+		TNode parent = root;
+		TNode focusNode = root;
 		boolean isLeft = false;
 
 		// Find the node to be deleted
@@ -145,7 +150,7 @@ public class BinaryTree {
 		// If the node has both the children, then replace the node by its
 		// inorder successor
 		else {
-			Node successor = getInorderSuccessor(focusNode, key);
+			TNode successor = getInorderSuccessor(focusNode);
 			if (focusNode.equals(root)) {
 				root = successor;
 			} else if (isLeft) {
@@ -157,8 +162,8 @@ public class BinaryTree {
 	}
 
 	// Find the inorder successor of the Node
-	private Node getInorderSuccessor(Node replaceNode, int key) {
-		Node focusNode = replaceNode;
+	public TNode getInorderSuccessor(TNode replaceNode) {
+		TNode focusNode = replaceNode;
 
 		// If there is a right subtree, then find the smallest element in the
 		// right subtree
@@ -190,7 +195,7 @@ public class BinaryTree {
 
 	// Find the height of the left subtree and the height of the right subtree
 	// and add them. Add one for root.
-	private int maxHeight(Node aNode) {
+	private int maxHeight(TNode aNode) {
 		if (aNode == null) {
 			return 0;
 		}
@@ -207,13 +212,13 @@ public class BinaryTree {
 		return iterativeMaxHeight(root);
 	}
 
-	private int iterativeMaxHeight(Node aNode) {
+	private int iterativeMaxHeight(TNode aNode) {
 		int height = 0;
 		if (aNode == null) {
 			return 0;
 		}
 
-		Queue<Node> levelQueue = new LinkedList<>();
+		Queue<TNode> levelQueue = new LinkedList<>();
 		levelQueue.add(aNode);
 
 		while (true) {
@@ -225,7 +230,7 @@ public class BinaryTree {
 			height++;
 
 			while (count > 0) {
-				Node headNode = levelQueue.peek();
+				TNode headNode = levelQueue.peek();
 				// Remove nodes from current level and nodes from the next level
 				levelQueue.remove();
 
@@ -244,7 +249,7 @@ public class BinaryTree {
 	}
 
 	// Longest path between two nodes in a tree
-	private int diameter(Node aNode) {
+	private int diameter(TNode aNode) {
 
 		/*
 		 * Find max of left subtree, right subtree, left diameter and right
@@ -263,19 +268,19 @@ public class BinaryTree {
 	}
 
 	// Mirror a tree
-	public Node mirrorTree() {
+	public TNode mirrorTree() {
 		return mirror(root);
 	}
 
 	// Swap the left subtree with the right subtree
-	private Node mirror(Node mirrorNode) {
+	private TNode mirror(TNode mirrorNode) {
 
 		if (mirrorNode == null) {
 			return mirrorNode;
 		}
 
-		Node leftMirror = mirror(mirrorNode.getLeftChild());
-		Node rightMirror = mirror(mirrorNode.getRightChild());
+		TNode leftMirror = mirror(mirrorNode.getLeftChild());
+		TNode rightMirror = mirror(mirrorNode.getRightChild());
 
 		mirrorNode.setLeftChild(rightMirror);
 		mirrorNode.setRightChild(leftMirror);
@@ -284,12 +289,12 @@ public class BinaryTree {
 	}
 
 	// Convert tree to a List
-	public void asList(List<Node> nodes) {
+	public void asList(List<TNode> nodes) {
 
 		asListUtil(nodes, this.root);
 	}
 
-	private void asListUtil(List<Node> nodes, Node n) {
+	private void asListUtil(List<TNode> nodes, TNode n) {
 		if (n == null) {
 			return;
 		}
@@ -302,7 +307,7 @@ public class BinaryTree {
 
 	public void balance() {
 
-		List<Node> nodes = new ArrayList<Node>();
+		List<TNode> nodes = new ArrayList<TNode>();
 
 		asList(nodes);
 
@@ -310,7 +315,7 @@ public class BinaryTree {
 	}
 
 	// Build Tree from a List of Nodes
-	private Node buildTree(List<Node> nodes, int start, int end) {
+	private TNode buildTree(List<TNode> nodes, int start, int end) {
 
 		if (start > end) {
 			return null;
@@ -318,7 +323,7 @@ public class BinaryTree {
 
 		int mid = (start + end) / 2;
 
-		Node midNode = nodes.get(mid);
+		TNode midNode = nodes.get(mid);
 
 		midNode.setLeftChild(buildTree(nodes, start, mid - 1));
 		midNode.setRightChild(buildTree(nodes, mid + 1, end));
@@ -326,7 +331,7 @@ public class BinaryTree {
 		return midNode;
 	}
 
-	public boolean areIdentical(Node root1, Node root2) {
+	public boolean areIdentical(TNode root1, TNode root2) {
 		if (root1 == null && root2 == null) {
 			return true;
 		} else if (root1 != null && root2 != null) {
