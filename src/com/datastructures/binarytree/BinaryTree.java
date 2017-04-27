@@ -102,12 +102,12 @@ public class BinaryTree {
 			parent = focusNode;
 
 			if (focusNode.getKey() <= key) {
-				isLeft = true;
-				focusNode = focusNode.getLeftChild();
+				isLeft = false;
+				focusNode = focusNode.getRightChild();
 			} else {
 				if (focusNode.getKey() > key) {
-					isLeft = false;
-					focusNode = focusNode.getRightChild();
+					isLeft = true;
+					focusNode = focusNode.getLeftChild();
 				}
 			}
 		}
@@ -341,6 +341,25 @@ public class BinaryTree {
 			}
 		}
 		return false;
+	}
+
+	private int findTNode(TNode root, int val) {
+		if (root == null) {
+			return 0;
+		}
+		if (root.getKey() == val) {
+			return 1;
+		}
+
+		if (root.getKey() < val) {
+			return findTNode(root.getLeftChild(), val);
+		} else {
+			return findTNode(root.getRightChild(), val);
+		}
+	}
+	
+	public int findNode(int val){
+		return findTNode(this.root, val);
 	}
 
 }
