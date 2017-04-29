@@ -35,6 +35,6 @@ public class BigFactorial {
 	}
 
 	public static void main(String[] args) {
-		factorial(100);
+		factorial(1000);
 	}
 }
