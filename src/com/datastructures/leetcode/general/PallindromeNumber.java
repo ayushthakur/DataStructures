@@ -2,7 +2,7 @@ package com.datastructures.leetcode.general;
 
 public class PallindromeNumber {
 	public static void main(String[] args) {
-		System.out.println(isPalindrome(1331));
+		System.out.println(isPalindrome(12321));
 	}
 
 	public static boolean isPalindrome(int x) {

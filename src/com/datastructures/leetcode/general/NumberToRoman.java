@@ -29,7 +29,7 @@ public class NumberToRoman {
 	
 	public static void main(String[] args) {
 
-		System.out.println(intToRoman(3));
+		System.out.println(intToRoman(64));
 	}
 
 	public static String intToRoman(int num) {

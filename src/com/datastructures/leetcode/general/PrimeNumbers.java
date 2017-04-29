@@ -6,8 +6,6 @@ import java.util.Arrays;
  * Find all primes to a given number
  */
 
-
-
 public class PrimeNumbers {
 
 	public static void seiveOfEratosthenes(int n){
