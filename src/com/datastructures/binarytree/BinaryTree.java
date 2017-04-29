@@ -98,7 +98,7 @@ public class BinaryTree {
 		boolean isLeft = false;
 
 		// Find the node to be deleted
-		while (focusNode.getKey() != key) {
+		while (focusNode != null && focusNode.getKey() != key) {
 			parent = focusNode;
 
 			if (focusNode.getKey() <= key) {
@@ -112,6 +112,10 @@ public class BinaryTree {
 			}
 		}
 
+		if (focusNode == null) {
+			System.out.println("Node to delete not found.");
+			return;
+		}
 		// If the node is a leaf node, simply remove it.
 		if (focusNode.getLeftChild() == null && focusNode.getRightChild() == null) {
 			if (focusNode.equals(root)) {
@@ -343,6 +347,7 @@ public class BinaryTree {
 		return false;
 	}
 
+	// Finds a node. If node is present returns 1 else returns 0
 	private int findTNode(TNode root, int val) {
 		if (root == null) {
 			return 0;
@@ -351,14 +356,14 @@ public class BinaryTree {
 			return 1;
 		}
 
-		if (root.getKey() < val) {
+		if (root.getKey() > val) {
 			return findTNode(root.getLeftChild(), val);
 		} else {
 			return findTNode(root.getRightChild(), val);
 		}
 	}
-	
-	public int findNode(int val){
+
+	public int findNode(int val) {
 		return findTNode(this.root, val);
 	}
 
