@@ -1,6 +1,7 @@
 package com.datastructures.binarytree;
 
 public class TNode {
+
 	private int key;
 	private TNode leftChild;
 	private TNode rightChild;
@@ -53,6 +54,11 @@ public class TNode {
 			return true;
 		else
 			return false;
+	}
+	
+	@Override
+	public String toString() {
+		return String.valueOf(key);
 	}
 	
 }

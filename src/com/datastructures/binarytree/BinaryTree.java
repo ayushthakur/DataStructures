@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.TreeMap;
 
 public class BinaryTree {
 	private TNode root = null;
-
+	private TreeMap<Integer,ArrayList<TNode>> nodeMap;
+	
 	public BinaryTree(TNode root) {
 		super();
 		this.root = root;
@@ -366,5 +368,34 @@ public class BinaryTree {
 	public int findNode(int val) {
 		return findTNode(this.root, val);
 	}
-
+	
+	public void vetricalOrder(int horizontalDistance, TNode root){
+		if(root == null)
+			return;
+		
+		ArrayList<TNode> list = null;
+		
+		if(nodeMap.containsKey(horizontalDistance)){
+			list = nodeMap.get(horizontalDistance);
+		}else{
+			list = new ArrayList<>();
+		}
+		
+		list.add(root);
+		nodeMap.put(horizontalDistance, list);
+		vetricalOrder(horizontalDistance-1, root.getLeftChild());
+		vetricalOrder(horizontalDistance+1, root.getRightChild());
+	}
+	
+	public void printVerticalOrder(){
+		if(nodeMap == null){
+			nodeMap = new TreeMap<Integer , ArrayList<TNode>>();
+		}else{
+			nodeMap.clear();
+		}
+		
+		vetricalOrder(0, this.root);
+		
+		nodeMap.forEach((k,v) -> System.out.println("Node at distance: "+k+":  "+v.toString()));
+	}
 }
