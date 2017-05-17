@@ -1,6 +1,6 @@
 # Data Structures and Algorithms
 
-Coding problems realted to data structures and algorithms. Contains the following kinds of problems
+Coding problems related to data structures and algorithms. Contains the following kinds of problems
 
 - LinkedLists
 - Binary Tree
